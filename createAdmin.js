@@ -11,8 +11,8 @@ mongoose.connect(mongoURI)
     console.log('MongoDB connected');
 
     const admin = new Admin({
-      username: 'yjaju16',
-      password: 'jaadu'  // Password will be hashed automatically by mongoose middleware
+      username: 'admin',
+      password: 'admin123'  // Password will be hashed automatically by mongoose middleware
     });
 
     await admin.save();
