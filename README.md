@@ -1,118 +1,89 @@
-# 🚀 Bank Management System — Backend
+# Bank Management Backend
 
-Secure, scalable, production-style backend for a full-stack banking platform.  
-Built with **Node.js, Express.js, MongoDB, JWT, and CI/CD automation**.
-
-It supports **role-based authentication**, real-time transactions, analytics, and OTP-based verification for sensitive actions.
+This is the backend server for the Bank Management System, built using **Node.js**, **Express**, and **MongoDB**. It provides secure RESTful API endpoints for managing admins, customers, transactions, and OTP-based verification.
 
 ---
 
-## 🔧 Tech Stack  
-- **Node.js** — Backend runtime  
-- **Express.js** — Routing & middleware  
-- **MongoDB + Mongoose** — Optimized data modeling  
-- **JWT** — Secure authentication  
-- **bcrypt** — Encrypted password storage  
-- **GitHub Actions** — CI/CD automated deployments  
-- **Render** — Backend hosting  
+## 🔧 Tech Stack
 
----
-
-## 🏦 Core Functionalities
-
-| Feature Category | Description |
-|---|---|
-| 🔐 Authentication | JWT-secured login for Admin & User |
-| 👤 Role-Based Access | Admin can view system analytics, users can view/manage accounts |
-| 💸 Transactions | Deposit, Withdraw, Transfer with validation |
-| 📜 Transaction History | **Time-based sorting & filtering** for quick search |
-| 📈 Admin Analytics | User activity, transaction metrics |
-| 🔏 OTP Verification | Added security for sensitive operations |
-| ☁️ Deployment | CI/CD pipeline keeps production updated |
+- **Node.js** – JavaScript runtime for server-side logic.
+- **Express.js** – Web framework for handling HTTP requests and routing.
+- **MongoDB** – NoSQL database for data storage.
+- **Mongoose** – MongoDB ODM for schema modeling and validation.
+- **bcrypt** – For hashing passwords securely.
+- **Other Dependencies** – Refer to `package.json` for the complete list.
 
 ---
 
 ## 📁 Project Structure
-
+```bash
 Bank-Management/
-├── models/ # Mongoose models (Admin, Customer, OTP, Transaction)
-├── routes/ # API route handlers
-├── server.js # App entrypoint + DB connection
-├── createAdmin.js # Bootstrap script for admin users
-└── package.json # Dependencies & scripts
-
-
----
-
-## 🗄️ Database Collections
-
-| Collection | Purpose |
-|---|---|
-| `admins` | Authentication & role management |
-| `customers` | Bank accounts + secure balance maintenance |
-| `transactions` | Timestamped logs for analytics |
-| `otpCodes` | Verification codes with expiry |
+├── models/ # Mongoose models (Admin, Customer, OtpCode, Transaction)
+├── routes/ # Route handlers for API endpoints
+├── server.js # Main Express app setup and DB connection
+├── createAdmin.js # Script to initialize admin user(s)
+└── package.json # Project metadata and dependencies
+```
 
 ---
 
-## 📡 REST API Overview
+## 🔐 Key Features
 
-| Endpoint | Method | Description |
-|---|---|---|
-| `/admin/login` | POST | Admin/User authentication |
-| `/customer/get` | GET | Fetch customer details |
-| `/transaction/deposit` | POST | Add funds |
-| `/transaction/transfer` | POST | Transfer funds securely |
-| `/analytics/admin` | GET | Dashboard data |
-
-> Full API documentation with request & response formats coming soon 📌  
-(Considering Swagger for auto-documentation)
+- **Admin Authentication** – Secure login with hashed passwords.
+- **Customer Management** – CRUD APIs for handling customer accounts.
+- **Transaction Operations** – Deposit, withdraw, transfer, and transaction history.
+- **OTP Verification** – Separate model for OTPs used in sensitive operations.
+- **Admin Analytics** – Endpoints for tracking user activity and system metrics.
 
 ---
 
-## ▶️ Running the Project Locally
+## ▶️ Usage
 
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/Yash-Jaju1/Bank-Management.git
 cd Bank-Management
+```
+### 2. Install Dependencies
+```bash
 npm install
+```
 
-
-Create a .env file:
+### 3. Environment Setup
+Create a .env file and define your environment variables:
+```bash
 PORT=5000
-MONGO_URI=your_mongodb_connection
+MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-Run server:
-npm start
-Optional Admin Setup:
+```
+### 4. Run the Server
+```bash
+node server.js
+```
+### 5. Create an Initial Admin (optional)
+```bash
 node createAdmin.js
-🧪 Testing (Manual)
+```
 
-✔ Auth validation
-✔ JWT route protection
-✔ Insufficient balance conditions
-✔ Failed OTP handling
-✔ Deposit / Withdraw / Transfer edge cases
-✔ Accurate timestamped transaction history
+---
 
-(Automated Jest tests planned for future updates)
+## 📡 API Endpoints
+The backend exposes RESTful APIs for integration with the frontend. Example routes:
 
-🚀 Deployment
-Component	Platform
-Backend API	Render
-CI/CD	GitHub Actions
+- POST /admin/login
+- GET /customer/get
+- POST /transaction/deposit
+- POST /otp/send
+- GET /analytics/admin
 
-🔗 Live backend URL (insert your link here)
+Use tools like Postman or Insomnia to test API endpoints.
 
-🔮 Future Enhancements
+---
 
-Suspicious transaction ML anomaly detection
+## 🗃️ Database
+All data is stored in MongoDB and includes the following collections:
 
-Swagger / Postman API documentation
-
-Notifications via email/SMS
-
-🧑‍💻 Author
-
-Yash Jaju
-SDE + Full-Stack Developer
+- admins
+- customers
+- transactions
+- otpCodes
