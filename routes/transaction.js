@@ -69,7 +69,7 @@ router.post('/withdraw/:id', async (req, res) => {
 });
 
 // Transfer money from one customer to another
-router.post('/transfer', async (req, res) => {
+router.post('/transfer/:id', async (req, res) => {
   try {
     const { fromCustomerId, toCustomerId, amount, remarks } = req.body;
 
