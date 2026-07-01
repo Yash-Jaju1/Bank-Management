@@ -71,7 +71,7 @@ router.post('/withdraw/:id', async (req, res) => {
 // Transfer money from one customer to another
 router.post('/transfer/:id', async (req, res) => {
   try {
-    const { fromCustomerId, toCustomerId, amount, remarks } = req.body;
+    const { toCustomerId, amount, remarks } = req.body;
 
     if (amount <= 0) {
       return res.status(400).json({ message: 'Transfer amount must be positive' });
@@ -81,7 +81,7 @@ router.post('/transfer/:id', async (req, res) => {
       return res.status(400).json({ message: 'Cannot transfer to the same account' });
     }
 
-    const sender = await Customer.findById(fromCustomerId);
+    const sender = await Customer.findById(req.params.id);
     const receiver = await Customer.findById(toCustomerId);
 
     if (!sender || !receiver) {
