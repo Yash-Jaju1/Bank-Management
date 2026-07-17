@@ -3,7 +3,7 @@ const Admin = require('./models/Admin'); // Adjust path if needed
 
 // Use your actual MongoDB Atlas connection string here. Make sure it starts with 'mongodb+srv://'
 // Replace <username>, <password>, <cluster-address>, and <database-name> accordingly.
-const mongoURI = 'mongodb+srv://yjaju16:jaadu@bank-management.klwb5o4.mongodb.net/test?retryWrites=true&w=majority&appName=Bank-Management';
+const mongoURI = process.env.MONGO_URI;
 
 // Connect to MongoDB
 mongoose.connect(mongoURI)
