@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection string (placeholder)
-const mongoURI = 'mongodb+srv://yjaju16:jaadu@bank-management.klwb5o4.mongodb.net/test?retryWrites=true&w=majority&appName=Bank-Management';
+const mongoURI = process.env.MONGO_URI;
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, {
