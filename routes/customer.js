@@ -207,12 +207,12 @@ router.post('/password-reset/reset', async (req, res) => {
 });
 
 
-router.get('/by-account/:accountNumber', async (req, res) => {
+router.post('/by-account/:accountNumber', async (req, res) => {
   try {
     const accountNumber = req.params.accountNumber;
 
     // Adjust the field if your schema uses different unique field
-    const customer = await Customer.findOne({ accountNumber: accountNumber });
+    const customer = await Customer.findById(id);
 
     if (!customer) {
       return res.status(404).json({ message: 'Customer not found' });

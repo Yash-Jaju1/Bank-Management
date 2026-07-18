@@ -5,7 +5,7 @@ const Admin = require('../models/Admin');
 const Customer = require('../models/Customer');
 const bcrypt = require('bcrypt');
 
-const JWT_SECRET = 'your_jwt_secret_here'; // Change to secure value in production
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Admin login route
 router.post('/login', async (req, res) => {
