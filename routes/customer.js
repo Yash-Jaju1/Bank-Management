@@ -211,8 +211,11 @@ router.post('/by-account/:accountNumber', async (req, res) => {
   try {
     const accountNumber = req.params.accountNumber;
 
-    // Adjust the field if your schema uses different unique field
-    const customer = await Customer.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(accountNumber)) {
+      return res.status(404).json({ message: 'Customer not found' });
+    }
+
+    const customer = await Customer.findById(accountNumber);
 
     if (!customer) {
       return res.status(404).json({ message: 'Customer not found' });
