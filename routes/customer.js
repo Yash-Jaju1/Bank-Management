@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Customer = require('../models/Customer');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 // Update MPIN endpoint
 router.post('/update-mpin', async (req, res) => {
@@ -205,7 +206,7 @@ router.post('/password-reset/reset', async (req, res) => {
   }
 });
 
-// customer.js (add this route)
+
 router.get('/by-account/:accountNumber', async (req, res) => {
   try {
     const accountNumber = req.params.accountNumber;

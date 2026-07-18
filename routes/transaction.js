@@ -69,19 +69,19 @@ router.post('/withdraw/:id', async (req, res) => {
 });
 
 // Transfer money from one customer to another
-router.post('/transfer/:id', async (req, res) => {
+router.post('/transfer', async (req, res) => {
   try {
-    const { toCustomerId, amount, remarks } = req.body;
+    const { fromCustomerId, toCustomerId, amount, remarks } = req.body;
 
     if (amount <= 0) {
       return res.status(400).json({ message: 'Transfer amount must be positive' });
     }
 
-    if (req.params.id === toCustomerId) {
+    if (fromCustomerId === toCustomerId) {
       return res.status(400).json({ message: 'Cannot transfer to the same account' });
     }
 
-    const sender = await Customer.findById(req.params.id);
+    const sender = await Customer.findById(fromCustomerId);
     const receiver = await Customer.findById(toCustomerId);
 
     if (!sender || !receiver) {
@@ -92,15 +92,12 @@ router.post('/transfer/:id', async (req, res) => {
       return res.status(400).json({ message: 'Insufficient balance in sender account' });
     }
 
-    // Deduct from sender
     sender.amount -= amount;
     await sender.save();
 
-    // Add to receiver
     receiver.amount += amount;
     await receiver.save();
 
-    // Save transactions
     const senderTransaction = new Transaction({
       customerId: sender._id,
       remarks: remarks || `Transfer to ${receiver.name}`,
