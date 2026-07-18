@@ -77,7 +77,7 @@ router.post('/transfer/:id', async (req, res) => {
       return res.status(400).json({ message: 'Transfer amount must be positive' });
     }
 
-    if (fromCustomerId === toCustomerId) {
+    if (req.params.id === toCustomerId) {
       return res.status(400).json({ message: 'Cannot transfer to the same account' });
     }
 
